@@ -5,6 +5,8 @@
 #include <vector>
 
 #include "linux_parser.h"
+#include <iostream>
+#include <typeinfo>
 
 using std::stof;
 using std::string;
@@ -68,10 +70,53 @@ vector<int> LinuxParser::Pids() {
 }
 
 // TODO: Read and return the system memory utilization
-float LinuxParser::MemoryUtilization() { return 0.0; }
+float LinuxParser::MemoryUtilization() { 
+  float memTotal, memFree, memAvailable, buffers, cached;
+  string line, key, value;
+
+  vector<string> keys;
+  vector<string> vals;
+
+  std::ifstream filestream(kProcDirectory + kMeminfoFilename);
+  // kMeminfoFilename
+  if (filestream.is_open()) {
+    for (int i=0; i<5; i++) {
+      std::getline(filestream, line);
+      std::replace(line.begin(), line.end(), ':', ' ');
+      std::istringstream linestream(line);
+      linestream >> key >> value;
+      keys.push_back(key);
+      vals.push_back(value);
+    }
+  }
+
+  memTotal = std::stof(vals[0]);
+  memFree = std::stof(vals[1]);
+  buffers = std::stof(vals[3]);
+  cached = std::stof(vals[4]);
+
+  string moo = typeid(memTotal).name();
+  // memAvailable = vals[2];
+  // float memUtil = (memTotal - memFree) / memTotal;  
+  
+  float memUtil = (memTotal - (memFree + buffers + cached)) / memTotal;    
+  // from: https://sites.google.com/a/thetnaing.com/therunningone/how-to-calculate-systems-memory-utilization
+
+  return memUtil; 
+}
 
 // TODO: Read and return the system uptime
-long LinuxParser::UpTime() { return 0; }
+long LinuxParser::UpTime() {
+  string up_time, idle_time;
+  string line;
+  std::ifstream stream(kProcDirectory + kUptimeFilename);
+  if (stream.is_open()) {
+    std::getline(stream, line);
+    std::istringstream linestream(line);
+    linestream >> up_time >> idle_time;
+  }
+  return stol(up_time); 
+}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }

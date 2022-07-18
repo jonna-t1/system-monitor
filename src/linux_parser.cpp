@@ -119,26 +119,91 @@ long LinuxParser::UpTime() {
 }
 
 // TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
+long LinuxParser::Jiffies() { 
+  auto jiffies = LinuxParser::CpuUtilization();
+  long total_jiffies = stol(jiffies[kUser_]) + stol(jiffies[kNice_])+ stol(jiffies[kSystem_])
+  + stol(jiffies[kIdle_])+ stol(jiffies[kIOwait_])+ stol(jiffies[kIRQ_])+ stol(jiffies[kSoftIRQ_])
+  + stol(jiffies[kSteal_])+ stol(jiffies[kGuest_])+ stol(jiffies[kGuestNice_]);
+
+  return total_jiffies;   
+  // return 0;
+}
 
 // TODO: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
 
 // TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
+long LinuxParser::ActiveJiffies() { 
+  auto jiffies = LinuxParser::CpuUtilization();
+  long active_jiffies = stol(jiffies[kUser_]) + stol(jiffies[kNice_])+ stol(jiffies[kSystem_]);
+  return active_jiffies; 
+  // return 0; 
+}
 
 // TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
+long LinuxParser::IdleJiffies() { 
+  auto jiffies = LinuxParser::CpuUtilization();
+  long idle_jiffies = stol(jiffies[kIdle_]) + stol(jiffies[kIOwait_]);
+  return idle_jiffies; 
+}
 
-// TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
+// TODO: Read and return CPU utilization - https://www.idnt.net/en-GB/kb/941772
+vector<string> LinuxParser::CpuUtilization() { 
+  string user, nice, system, val;
+  vector<string> jiffies;
+  string line;
+  std::ifstream stream(kProcDirectory + kStatFilename);
+  if (stream.is_open()) {
+    std::getline(stream, line);
+    std::istringstream linestream(line);
+    while(linestream >> val){
+      jiffies.push_back(val);
+    }
+  }
+  jiffies.erase(jiffies.begin()); // https://stackoverflow.com/questions/40656871/remove-from-the-beginning-of-stdvector
+  
+  return jiffies; 
+}
 
 // TODO: Read and return the total number of processes
-int LinuxParser::TotalProcesses() { return 0; }
+int LinuxParser::TotalProcesses() { 
+  string key, value;
+  int proc_val;
+  string line;
+  std::ifstream stream(kProcDirectory + kStatFilename);
+  if (stream.is_open()) {
+    while (std::getline(stream, line)) {
+      std::istringstream linestream(line);
+      linestream >> key;
+      if (key == "processes") 
+        linestream >> value;
+    }
+  }
+  proc_val = stoi(value);
+  // return stoi(proc_val);
+  return proc_val;
+  // return 0; 
+}
 
 // TODO: Read and return the number of running processes
-int LinuxParser::RunningProcesses() { return 0; }
+int LinuxParser::RunningProcesses() { 
+  string key, value;
+  int proc_val;
+  string line;
+  std::ifstream stream(kProcDirectory + kStatFilename);
+  if (stream.is_open()) {
+    while (std::getline(stream, line)) {
+      std::istringstream linestream(line);
+      linestream >> key;
+      if (key == "procs_running")
+        linestream >> value;
+    }
+  }
+  proc_val = stoi(value);
+  // return stoi(proc_val);
+  return proc_val;
+}
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function

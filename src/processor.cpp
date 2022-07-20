@@ -19,7 +19,8 @@ float Processor::Utilization() {
     float delta_active = active - prevActive_;
     float delta_total = total - prevTotal_;
 
-    float utilization = (delta_active)*1.0 / delta_total;
+    float utilization = delta_active / delta_total;
+    if (utilization < 0.0){return 0.0;}
     // LinuxParser 
     return utilization; 
 }

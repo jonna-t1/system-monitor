@@ -16,11 +16,29 @@ float Processor::Utilization() {
     long active = LinuxParser::ActiveJiffies();
     long total = LinuxParser::Jiffies();
 
-    float delta_active = active - prevActive_;
-    float delta_total = total - prevTotal_;
+    float delta_active;
+    float delta_total;
 
-    float utilization = delta_active / delta_total;
-    if (utilization < 0.0){return 0.0;}
-    // LinuxParser 
-    return utilization; 
+    if (active > prevActive_){
+        delta_active = active - prevActive_;
+    }else {
+        delta_active = 0;
+    }
+
+    if (total > prevTotal_){
+        delta_total = total - prevTotal_;
+    }else{
+        delta_total = 1;
+    }
+
+    float utilization_ = delta_active / delta_total;
+    // float utilization_;
+
+    try {
+        utilization_ = delta_active / delta_total;
+    } catch (...) {
+        utilization_ = 0;
+    }
+    return utilization_; 
+
 }

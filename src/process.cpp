@@ -11,7 +11,9 @@ using std::string;
 using std::to_string;
 using std::vector;
 
-Process::Process(int pid) : pid_(pid){}
+Process::Process(int pid) : pid_(pid){
+    utilization_ = LinuxParser::CpuUtilization(pid);
+}
 
 // TODO: Return this process's ID
 int Process::Pid() { return pid_; }
@@ -19,7 +21,8 @@ int Process::Pid() { return pid_; }
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization() { 
 //   https://stackoverflow.com/questions/16726779/how-do-i-get-the-total-cpu-usage-of-an-application-from-proc-pid-stat/16736599#16736599
-  vector<string> vals = LinuxParser::CpuUtilization(pid_);
+//   vector<string> vals = LinuxParser::CpuUtilization(pid_);
+vector<string> vals = utilization_;
 // #14 utime - CPU time spent in user code, measured in clock ticks
 // #15 stime - CPU time spent in kernel code, measured in clock ticks
 // #16 cutime - Waited-for children's CPU time spent in user code (in clock ticks)
@@ -34,30 +37,33 @@ float Process::CpuUtilization() {
 // #22 starttime - Time when the process started, measured in clock ticks
     int ind_starttime = 23;
 
+    long start_time, up_time, total_time;
+
+    float seconds;
    // In most cases, getconf CLK_TCK can be used to return the number of clock ticks.
     // The sysconf(_SC_CLK_TCK) C function call may also be used to return the hertz value.
-    long start_time = stol(vals[ind_starttime]);
+    start_time = stol(vals[ind_starttime]);
 
-    long up_time = LinuxParser::UpTime(); 
+    up_time = LinuxParser::UpTime(); 
 
-    long total_time = stol(vals[ind_utime]) + stol(vals[ind_stime]) + stol(vals[ind_cutime]) + stol(vals[ind_cstime]);
+    total_time = stol(vals[ind_utime]) + stol(vals[ind_stime]) + stol(vals[ind_cutime]) + stol(vals[ind_cstime]);
 
-    float seconds = up_time - (start_time / hz);
+    seconds = up_time - (start_time / hz);
 
-    float cpu_usage = ((total_time / hz) / seconds);
+    cpu_usage_ = (float(total_time) / float(hz)) / seconds;
 
     try
     {
         /* code */
-        cpu_usage = ((total_time / hz) / seconds);
+        cpu_usage_ = (float(total_time) / float(hz)) / seconds;
     }
     catch(...)
     {
-        cpu_usage = 0.0;
+        cpu_usage_ = 0.0;
     }
     
 
-    return cpu_usage;
+    return cpu_usage_;
 }
 
 // TODO: Return the command that generated this process
@@ -82,5 +88,5 @@ long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const& a[[maybe_unused]]) const { 
-    return a.utilization_ < utilization_; 
+    return a.cpu_usage_ < cpu_usage_; 
 }

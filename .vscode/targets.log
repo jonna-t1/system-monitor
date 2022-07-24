@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul 20 11:51:28 2022
+# Make data base, printed on Thu Jul 21 10:43:10 2022
 
 # Variables
 
@@ -15,7 +15,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
+WSLENV = ELECTRON_RUN_AS_NODE/w:
 # default
 .SHELLFLAGS := -c
 # automatic
@@ -31,7 +31,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/jobo/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/node
+_ = /mnt/c/Users/jonna/AppData/Local/Programs/Microsoft VS Code/bin/code
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -51,9 +51,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-fb911a82-63ee-461a-9412-e94178f29c78.sock
-# environment
-VSCODE_SERVER_TAR = /mnt/c/Users/jonna/AppData/Local/Temp/vscode-remote-wsl/3b889b090b5ad5793f524b5d1d39fda662b96a2a/vscode-server-stable-linux-x64.tar.gz
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-26afd7b8-ce03-48c4-b5fa-33276d5ed8d2.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -67,7 +65,7 @@ PWD = /home/jobo/projects/system-monitor
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/14235_interop
+WSL_INTEROP = /run/WSL/374_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
@@ -91,7 +89,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 0
+SHLVL = 1
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -99,7 +97,7 @@ USER = jobo
 # makefile
 .DEFAULT_GOAL := all
 # environment
-NAME = DESKTOP-PSQ6FIJ
+NAME = Code
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -149,7 +147,7 @@ WSL_DISTRO_NAME = Ubuntu
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=69/1024=7%, Rehash=0, Collisions=4/97=4%
+# Load=68/1024=7%, Rehash=0, Collisions=4/96=4%
 
 # Pattern-specific Variable Values
 
@@ -233,6 +231,7 @@ debug:
 	cd build && \
 	cmake -DCMAKE_BUILD_TYPE=debug .. && \
 	make
+ 
 
 # Not a target:
 test:
@@ -279,7 +278,6 @@ clean:
 # strcache performance: lookups = 54 / hit rate = 51%
 # hash-table stats:
 # Load=26/8192=0%, Rehash=0, Collisions=1/54=2%
- 
-# Finished Make data base on Wed Jul 20 11:51:28 2022
+# Finished Make data base on Thu Jul 21 10:43:10 2022
 
  

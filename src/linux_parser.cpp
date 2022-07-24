@@ -8,6 +8,8 @@
 #include <iostream>
 #include <typeinfo>
 
+#include <iomanip>      // std::setprecision
+
 using std::stof;
 using std::string;
 using std::to_string;

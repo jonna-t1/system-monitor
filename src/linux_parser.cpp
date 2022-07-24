@@ -15,6 +15,16 @@ using std::string;
 using std::to_string;
 using std::vector;
 
+string LinuxParser::cleanStr(string str){
+  // remove all characters that arent digits
+  auto it = std::remove_if(str.begin(), str.end(), [](char const &c) {
+      return !std::isdigit(c);
+  });
+  str.erase(it, str.end());
+
+  return str;
+}
+
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() {
   string line;
@@ -117,12 +127,17 @@ long LinuxParser::UpTime() {
     std::istringstream linestream(line);
     linestream >> up_time >> idle_time;
   }
+  up_time = cleanStr(up_time);  //clean
   return stol(up_time); 
 }
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { 
-  auto jiffies = LinuxParser::CpuUtilization();
+  auto jiff = LinuxParser::CpuUtilization();
+  vector<string> jiffies{};
+  for(string s : jiff)
+    jiffies.push_back(cleanStr(s));
+
   long total_jiffies = stol(jiffies[kUser_]) + stol(jiffies[kNice_])+ stol(jiffies[kSystem_])
   + stol(jiffies[kIdle_])+ stol(jiffies[kIOwait_])+ stol(jiffies[kIRQ_])+ stol(jiffies[kSoftIRQ_])
   + stol(jiffies[kSteal_])+ stol(jiffies[kGuest_])+ stol(jiffies[kGuestNice_]);

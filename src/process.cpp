@@ -42,15 +42,18 @@ vector<string> vals = utilization_;
     float seconds;
    // In most cases, getconf CLK_TCK can be used to return the number of clock ticks.
     // The sysconf(_SC_CLK_TCK) C function call may also be used to return the hertz value.
-    start_time = stol(vals[ind_starttime]);
+    start_time = stol(LinuxParser::cleanStr(vals[ind_starttime]));
 
     up_time = LinuxParser::UpTime(); 
 
-    total_time = stol(vals[ind_utime]) + stol(vals[ind_stime]) + stol(vals[ind_cutime]) + stol(vals[ind_cstime]);
+    total_time = stol(LinuxParser::cleanStr(vals[ind_utime])) + stol(LinuxParser::cleanStr(vals[ind_stime])) +
+     stol(LinuxParser::cleanStr(vals[ind_cutime])) + stol(LinuxParser::cleanStr(vals[ind_cstime]));
 
     seconds = up_time - (start_time / hz);
 
-    cpu_usage_ = (float(total_time) / float(hz)) / seconds;
+    float test = (float(total_time) / float(hz)) / seconds;
+
+    cpu_usage_ = test;
 
     try
     {

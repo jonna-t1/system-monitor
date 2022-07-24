@@ -19,6 +19,7 @@ const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
 
 // System
+std::string cleanStr(std::string str);
 float MemoryUtilization();
 long UpTime();
 std::vector<int> Pids();

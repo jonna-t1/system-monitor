@@ -16,6 +16,8 @@ using std::to_string;
 using std::vector;
 
 string LinuxParser::cleanStr(string str){
+  if (str == "" || str == "/t")
+    str = "0";
   // remove all characters that arent digits
   auto it = std::remove_if(str.begin(), str.end(), [](char const &c) {
       return !std::isdigit(c);
@@ -189,7 +191,7 @@ vector<string> LinuxParser::CpuUtilization() {
     std::getline(stream, line);
     std::istringstream linestream(line);
     while(linestream >> val){
-      jiffies.push_back(val);
+      jiffies.push_back(cleanStr(val));
     }
   }
   jiffies.erase(jiffies.begin()); // https://stackoverflow.com/questions/40656871/remove-from-the-beginning-of-stdvector
@@ -265,6 +267,7 @@ string LinuxParser::Ram(int pid[[maybe_unused]]) {
     }
   }
   // value;
+  string str = cleanStr(value);
   float mem = stol(value)/1000;
 
   return to_string(mem);   
@@ -315,7 +318,8 @@ string LinuxParser::User(int pid[[maybe_unused]]) {
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::UpTime(int pid[[maybe_unused]]) { 
   auto data = LinuxParser::CpuUtilization(pid);
-  long up_time = stol(data[23])/sysconf(_SC_CLK_TCK);
+  string up_time_str = cleanStr(data[23]);
+  long up_time = stol(up_time_str)/sysconf(_SC_CLK_TCK);
   return up_time;
   // return 0; 
 }

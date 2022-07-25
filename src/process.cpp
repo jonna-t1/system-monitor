@@ -47,18 +47,18 @@ vector<string> vals = utilization_;
     up_time = LinuxParser::UpTime(); 
 
     total_time = stol(LinuxParser::cleanStr(vals[ind_utime])) + stol(LinuxParser::cleanStr(vals[ind_stime])) +
-     stol(LinuxParser::cleanStr(vals[ind_cutime])) + stol(LinuxParser::cleanStr(vals[ind_cstime]));
+    stol(LinuxParser::cleanStr(vals[ind_cutime])) + stol(LinuxParser::cleanStr(vals[ind_cstime]));
 
     seconds = up_time - (start_time / hz);
 
-    float test = (float(total_time) / float(hz)) / seconds;
+    float test = 100 * (float(total_time) / float(hz)) / seconds;
 
     cpu_usage_ = test;
 
     try
     {
         /* code */
-        cpu_usage_ = (float(total_time) / float(hz)) / seconds;
+        cpu_usage_ = 100 * (float(total_time) / float(hz)) / seconds;
     }
     catch(...)
     {

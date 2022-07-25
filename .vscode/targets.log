@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jul 21 10:43:10 2022
+# Make data base, printed on Mon Jul 25 09:57:54 2022
 
 # Variables
 
@@ -15,7 +15,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = ELECTRON_RUN_AS_NODE/w:
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
 # automatic
@@ -31,7 +31,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /mnt/c/Users/jonna/AppData/Local/Programs/Microsoft VS Code/bin/code
+_ = /home/jobo/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -45,13 +45,13 @@ VSCODE_CWD = /mnt/c/Users/jonna/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/jobo/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/windows/system32:/mnt/c/windows:/mnt/c/windows/System32/Wbem:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/jonna/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jonna/AppData/Roaming/npm:/mnt/c/Users/jonna/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2021.3.2/bin:/mnt/c/msys64/mingw64/bin:/mnt/c/Program Files/CMake/bin:/mnt/c/Users/jonna/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
+PATH = /home/jobo/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/bin/remote-cli:/home/jobo/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/windows/system32:/mnt/c/windows:/mnt/c/windows/System32/Wbem:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/jonna/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jonna/AppData/Roaming/npm:/mnt/c/Users/jonna/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/mnt/c/Program Files/JetBrains/PyCharm Community Edition 2021.3.2/bin:/mnt/c/msys64/mingw64/bin:/mnt/c/Program Files/CMake/bin:/mnt/c/Users/jonna/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
 # environment
 XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-26afd7b8-ce03-48c4-b5fa-33276d5ed8d2.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-d8fd14eb-4d27-4d08-a7fd-eba72f388aa6.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -61,11 +61,13 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 DISPLAY = :0
 # environment
+WSL2_GUI_APPS_ENABLED = 1
+# environment
 PWD = /home/jobo/projects/system-monitor
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/374_interop
+WSL_INTEROP = /run/WSL/13815_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
@@ -89,7 +91,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -97,7 +99,7 @@ USER = jobo
 # makefile
 .DEFAULT_GOAL := all
 # environment
-NAME = Code
+NAME = DESKTOP-PSQ6FIJ
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -147,7 +149,7 @@ WSL_DISTRO_NAME = Ubuntu
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=68/1024=7%, Rehash=0, Collisions=4/96=4%
+# Load=69/1024=7%, Rehash=0, Collisions=4/97=4%
 
 # Pattern-specific Variable Values
 
@@ -231,7 +233,6 @@ debug:
 	cd build && \
 	cmake -DCMAKE_BUILD_TYPE=debug .. && \
 	make
- 
 
 # Not a target:
 test:
@@ -278,6 +279,7 @@ clean:
 # strcache performance: lookups = 54 / hit rate = 51%
 # hash-table stats:
 # Load=26/8192=0%, Rehash=0, Collisions=1/54=2%
-# Finished Make data base on Thu Jul 21 10:43:10 2022
+ 
+# Finished Make data base on Mon Jul 25 09:57:54 2022
 
  

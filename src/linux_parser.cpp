@@ -16,7 +16,8 @@ using std::to_string;
 using std::vector;
 
 string LinuxParser::cleanStr(string str){
-  if (str == "" || str == "/t")
+  // check if it is empty or not before transforming it into long using stol method
+  if (str == "" || str == "/t")   
     str = "0";
   // remove all characters that arent digits
   auto it = std::remove_if(str.begin(), str.end(), [](char const &c) {
@@ -261,12 +262,16 @@ string LinuxParser::Ram(int pid[[maybe_unused]]) {
     while (std::getline(stream, line)) {
       std::istringstream linestream(line);
       linestream >> key;
-      if (key == "VmSize:") 
+      if (key == "VmSize:"){
         linestream >> value;
-        // break;
+        value = cleanStr(value);
+        break;
+      }
+        
     }
+    stol(value);  // initiate stol in  if (stream.is_open())
   }
-  // value;
+  //  initiate any string you are going to fetch by an integer in a form of string
   string str = cleanStr(value);
   float mem = stol(value)/1000;
 
@@ -285,9 +290,10 @@ string LinuxParser::Uid(int pid[[maybe_unused]]) {
     while (std::getline(stream, line)) {
       std::istringstream linestream(line);
       linestream >> key;
-      if (key == "Uid:") 
+      if (key == "Uid:"){
         linestream >> value;
-        // break;
+        break;
+      }
     }
   }
   // value;
@@ -335,7 +341,8 @@ vector<string> LinuxParser::CpuUtilization(int pid[[maybe_unused]])
     std::getline(stream, line);
     std::istringstream linestream(line);
     while(linestream >> val){
-      values.push_back(val);
+      string valStr = cleanStr(val);
+      values.push_back(valStr);
     }
   }
   return values;

@@ -7,8 +7,8 @@ using std::vector;
 using std::string;
 
 Processor::Processor() :
-    prevActive_(LinuxParser::ActiveJiffies()),
-    prevTotal_(LinuxParser::Jiffies()) {}
+    prevTotal_(LinuxParser::Jiffies()),
+    prevActive_(LinuxParser::ActiveJiffies()) {}
 
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization() { 

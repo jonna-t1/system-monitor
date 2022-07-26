@@ -51,14 +51,14 @@ vector<string> vals = utilization_;
 
     seconds = up_time - (start_time / hz);
 
-    float test = 100 * (float(total_time) / float(hz)) / seconds;
+    float test = (float(total_time) / float(hz)) / seconds;
 
     cpu_usage_ = test;
 
     try
     {
         /* code */
-        cpu_usage_ = 100 * (float(total_time) / float(hz)) / seconds;
+        cpu_usage_ = (float(total_time) / float(hz)) / seconds;
     }
     catch(...)
     {
@@ -86,7 +86,7 @@ string Process::User() {
 }
 
 // TODO: Return the age of this process (in seconds)
-long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
+long int Process::UpTime() { return LinuxParser::UpTime() - LinuxParser::UpTime(pid_); }
 
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function

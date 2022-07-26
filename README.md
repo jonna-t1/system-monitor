@@ -1,4 +1,4 @@
-# CppND-System-Monitor
+# System Monitor
 
 A Linux based System monitor that provides text-based graphical output in the terminal.
 

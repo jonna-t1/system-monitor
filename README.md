@@ -2,8 +2,6 @@
 
 A Linux based System monitor that provides text-based graphical output in the terminal.
 
-Object Oriented Programming Project of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). 
-
 ## ncurses
 [ncurses](https://www.gnu.org/software/ncurses/) is a library that facilitates text-based graphical output in the terminal. This project relies on ncurses for display output.
 

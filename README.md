@@ -16,11 +16,13 @@ This project uses [Make](https://www.gnu.org/software/make/). The Makefile has f
 * `debug` compiles the source code and generates an executable, including debugging symbols
 * `clean` deletes the `build/` directory, including all of the build artifacts
 
-## Instructions
+## Instructions (must be on Linux systems)
 
 1. Clone the project repository: `git clone https://github.com/jonna-t1/system-monitor`
 
-2. Build the project: `make build`
+2. `sudo apt install libncurses5-dev libncursesw5-dev`
 
-3. Run the resulting executable: `./build/monitor`
+3. Build the project: `make build`
+
+4. Run the resulting executable: `./build/monitor`
 ![Starting System Monitor](images/monitor.png)

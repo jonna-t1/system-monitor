@@ -20,7 +20,7 @@ This project uses [Make](https://www.gnu.org/software/make/). The Makefile has f
 
 1. Clone the project repository: `git clone https://github.com/jonna-t1/system-monitor`
 
-2. `sudo apt install libncurses5-dev libncursesw5-dev`
+2. `sudo apt install libncurses5-dev libncursesw5-dev cmake`
 
 3. Build the project: `make build`
 
